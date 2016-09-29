@@ -1,0 +1,58 @@
+[user]
+  name = Michal Fojtik
+  mail = mfojtik@redhat.com
+  email = mfojtik@redhat.com
+	signingkey = 38AAC0EE
+
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+	ui = true
+  pager = true
+
+[apply]
+  whitespace = strip
+
+[alias]
+  b = branch -v
+  fp = format-patch -k -M origin/master -o /tmp/p
+  rb = rebase -i origin/master
+  s = status
+  stat = show --stat --oneline HEAD
+  c = commit
+  ck = checkout
+  cp = cherry-pick
+  whatadded = log --diff-filter=A
+  acommit = commit --amend --no-edit
+  xcommit = commit -m "xxx"
+  g = grep --break --heading --line-number
+  keep = checkout --theirs
+  files = diff --name-only master..HEAD
+
+[commit]
+  template = /Users/mfojtik/.git_commit_template
+	gpgsign = false
+
+[core]
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  excludesfile = /Users/mfojtik/.gitignore
+
+[push]
+ default = matching
+
+[grep]
+  extendRegexp = true
+  lineNumber = true
+
+[rerere]
+  autoupdate = true
+  enabled = true
+[credential]
+  helper = cache --timeout=3600
+[url "https://"]
+	insteadOf = git://
+[filter "lfs"]
+	smudge = git-lfs smudge %f
+	required = true
+	clean = git-lfs clean %f

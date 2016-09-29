@@ -1,0 +1,39 @@
+# secret stuff
+source $HOME/.env-vars
+
+alias ts="tig status"
+alias open="xdg-open"
+alias mc="mc -a"
+alias ls="ls -lhaGF"
+alias rm="rm -i"
+alias vim="nvim"
+
+alias git-sync="cd $HOME/repos && git-repo-sync ."
+
+# Quick cds
+alias cd-origin="cd ${HOME}/go/src/github.com/openshift/origin"
+alias cd-kube="cd ${HOME}/go/src/k8s.io/kubernetes"
+
+# Add my work to my PATH
+export PATH=$PATH:${GOPATH}/src/github.com/openshift/origin/_output/local/bin/darwin/amd64
+export PATH=$PATH:${GOPATH}/src/github.com/openshift/source-to-image/_output/local/bin/darwin/amd64
+
+find-file() {
+  find . -name *$@* | xargs du -h
+}
+
+gitpush() {
+  local branch=$(git rev-parse --abbrev-ref HEAD)
+  git push origin ${branch} -v -f
+  which otp &>/dev/null && otp get
+}
+
+# quick cd to linked dirs (need greadlink for Mac)
+lcd() {
+  cd "$(greadlink -f $1)"
+}
+
+gitclean() {
+    git branch --merged | grep -v "\*" | xargs -n 1 git branch -d
+}
+
