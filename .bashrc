@@ -22,6 +22,8 @@ export PROMPT_DIRTRIM=2
 complete -o default -o nospace -F _git_branch gb
 complete -o default -o nospace -F _git_checkout gco
 
+ssh-add -K ~/.ssh/id_rsa &>/dev/null
+
 bind "set completion-ignore-case on"
 bind "set completion-map-case on"
 bind "set completion-map-case on"
@@ -45,4 +47,5 @@ export BROWSER="google-chrome-beta"
 export GOPATH=$HOME/go
 
 export PATH=$HOME/bin:$GOPATH/bin:$PATH
-export PS1=" \w \[\033[00m\]\[\033[00;34m\]∎\[\033[00m\] "
+
+export PS1="\w \[\033[00m\]\[\033[00;34m\]∎\[\033[00m\] "

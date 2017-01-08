@@ -29,6 +29,17 @@
   g = grep --break --heading --line-number
   keep = checkout --theirs
   files = diff --name-only master..HEAD
+  both-merged = !git-both-merged
+  mpr = "!f() { \
+    if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
+    git fetch origin refs/pull/$1/head:pr/$1 && \
+    git rebase master pr/$1 && \
+    git checkout master && \
+    git merge pr/$1 && \
+    git branch -D pr/$1 && \
+    git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
+    fi \
+    }; f"
 
 [commit]
   template = /Users/mfojtik/.git_commit_template
@@ -37,6 +48,7 @@
 [core]
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   excludesfile = /Users/mfojtik/.gitignore
+	trustctime = false
 
 [push]
  default = matching
@@ -53,6 +65,7 @@
 [url "https://"]
 	insteadOf = git://
 [filter "lfs"]
-	smudge = git-lfs smudge %f
 	required = true
-	clean = git-lfs clean %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process

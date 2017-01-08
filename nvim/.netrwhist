@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/Users/mfojtik/go/src/github.com/openshift/origin/pkg/cmd/admin'
+let g:netrw_dirhist_2='/Users/mfojtik/go/src/github.com/openshift/origin/pkg/cmd/admin/prune'
+let g:netrw_dirhist_3='/Users/mfojtik/go/src/github.com/openshift/origin/pkg/cmd/admin'
+let g:netrw_dirhist_4='/Users/mfojtik/go/src/github.com/openshift/origin/pkg/cmd/admin/prune'
+let g:netrw_dirhist_5='/Users/mfojtik/go/src/github.com/openshift/origin/pkg/cmd/admin'
+let g:netrw_dirhist_6='/Users/mfojtik/go/src/github.com/openshift/origin/pkg/cmd/admin/prune'
+let g:netrw_dirhist_7='/Users/mfojtik/go/src/github.com/openshift/origin/pkg/cmd/admin'

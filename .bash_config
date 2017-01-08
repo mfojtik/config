@@ -6,17 +6,23 @@ alias open="xdg-open"
 alias mc="mc -a"
 alias ls="ls -lhaGF"
 alias rm="rm -i"
-alias vim="nvim"
-
 alias git-sync="cd $HOME/repos && git-repo-sync ."
+
+# Wrap vim to reset the cursor
+alias vim="/Users/mfojtik/bin/vim-wrapper"
+alias vim-update="vim +PlugUpdate"
+
 
 # Quick cds
 alias cd-origin="cd ${HOME}/go/src/github.com/openshift/origin"
 alias cd-kube="cd ${HOME}/go/src/k8s.io/kubernetes"
+alias cd-mfojtik="cd ${HOME}/go/src/github.com/mfojtik"
+
+export ORIGIN_PATH=${GOPATH}/src/github.com/openshift
 
 # Add my work to my PATH
-export PATH=$PATH:${GOPATH}/src/github.com/openshift/origin/_output/local/bin/darwin/amd64
-export PATH=$PATH:${GOPATH}/src/github.com/openshift/source-to-image/_output/local/bin/darwin/amd64
+export PATH=$PATH:${ORIGIN_PATH}/origin/_output/local/bin/darwin/amd64
+export PATH=$PATH:${ORIGIN_PATH}/source-to-image/_output/local/bin/darwin/amd64
 
 find-file() {
   find . -name *$@* | xargs du -h
@@ -25,7 +31,10 @@ find-file() {
 gitpush() {
   local branch=$(git rev-parse --abbrev-ref HEAD)
   git push origin ${branch} -v -f
-  which otp &>/dev/null && otp get
+  if which otp &>/dev/null; then
+    echo
+    otp get
+  fi
 }
 
 # quick cd to linked dirs (need greadlink for Mac)
@@ -36,4 +45,3 @@ lcd() {
 gitclean() {
     git branch --merged | grep -v "\*" | xargs -n 1 git branch -d
 }
-
